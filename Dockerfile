@@ -13,7 +13,6 @@ RUN set -ex; \
                 libmagickwand-dev \
                 libpng-dev \
                 libpq-dev \
-                libsqlite3-dev \
                 libzip-dev \
         ; \
         \
@@ -27,7 +26,6 @@ RUN set -ex; \
                 ldap \
                 pdo_mysql \
                 pdo_pgsql \
-                pdo_sqlite \
                 zip \
         ; \
         pecl install imagick; \
