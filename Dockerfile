@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:7.4-apache
 
 RUN set -ex; \
         apt-get update; \
@@ -61,4 +61,4 @@ COPY --from=zzci/init / /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]
