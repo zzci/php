@@ -46,7 +46,7 @@ RUN set -ex; \
         apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
         \
         apt-get install -y --no-install-recommends \
-        rsync wget curl net-tools procps; \
+        rsync wget curl net-tools procps unzip; \
         \
         rm -rf /var/lib/apt/lists/* && \
 # add composer.phar
