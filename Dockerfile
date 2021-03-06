@@ -27,6 +27,7 @@ RUN set -ex; \
                 pdo_mysql \
                 pdo_pgsql \
                 zip \
+                bcmath \
         ; \
         pecl install imagick; \
         docker-php-ext-enable imagick; \
