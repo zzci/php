@@ -14,6 +14,9 @@ RUN set -ex; \
                 libpng-dev \
                 libpq-dev \
                 libzip-dev \
+                libcurl4-openssl-dev \
+                pkg-config \
+                libssl-dev \
         ; \
         \
         debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
