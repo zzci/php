@@ -32,6 +32,7 @@ RUN set -ex; \
                 zip \
                 mysqli \
                 bcmath \
+                opcache \
         ; \
         pecl install imagick; \
         printf "\n" | pecl install redis; \
