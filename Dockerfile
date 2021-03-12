@@ -55,10 +55,10 @@ RUN set -ex; \
         apt-get install -y --no-install-recommends \
         rsync wget curl net-tools procps unzip; \
         \
-        rm -rf /var/lib/apt/lists/* && \
+        rm -rf /var/lib/apt/lists/* ; \
 # add composer.phar
-        wget -qO /tmp/composer-installer.php https://getcomposer.org/installer  && \
-        php /tmp/composer-installer.php --install-dir=/usr/local/bin/ && \
+        wget -qO /tmp/composer-installer.php https://getcomposer.org/installer ; \
+        php /tmp/composer-installer.php --install-dir=/usr/local/bin/ --filename=composer ; \
         rm /tmp/composer-installer.php
 
 ADD docker-entrypoint.sh /
