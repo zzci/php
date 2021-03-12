@@ -30,6 +30,7 @@ RUN set -ex; \
                 pdo_mysql \
                 pdo_pgsql \
                 zip \
+                mysqli \
                 bcmath \
         ; \
         pecl install imagick; \
