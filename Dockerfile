@@ -14,7 +14,7 @@ RUN set -ex; \
                 libpng-dev \
                 libpq-dev \
                 libwebp-dev \
-                ibxpm-dev \
+                libxpm-dev \
                 libzip-dev \
                 libcurl4-openssl-dev \
                 pkg-config \
