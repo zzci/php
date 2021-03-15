@@ -14,7 +14,6 @@ RUN set -ex; \
                 libpng-dev \
                 libpq-dev \
                 libwebp-dev \
-                libxpm-dev \
                 libzip-dev \
                 libcurl4-openssl-dev \
                 pkg-config \
@@ -22,14 +21,9 @@ RUN set -ex; \
         ; \
         debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
         docker-php-ext-configure gd \
-                --with-gd \
-                --with-webp-dir \
-                --with-jpeg-dir \
-                --with-png-dir \
-                --with-zlib-dir \
-                --with-xpm-dir \
-                --with-freetype-dir \
-                --enable-gd-native-ttf; \
+                --with-webp \
+                --with-jpeg \
+                --with-freetype; \
         docker-php-ext-configure ldap --with-libdir="lib/$debMultiarch"; \
         docker-php-ext-install \
                 exif \
