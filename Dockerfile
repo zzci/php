@@ -13,14 +13,23 @@ RUN set -ex; \
                 libmagickwand-dev \
                 libpng-dev \
                 libpq-dev \
+                libwebp-dev \
+                ibxpm-dev \
                 libzip-dev \
                 libcurl4-openssl-dev \
                 pkg-config \
                 libssl-dev \
         ; \
-        \
         debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
-        docker-php-ext-configure gd; \
+        docker-php-ext-configure gd \
+                --with-gd \
+                --with-webp-dir \
+                --with-jpeg-dir \
+                --with-png-dir \
+                --with-zlib-dir \
+                --with-xpm-dir \
+                --with-freetype-dir \
+                --enable-gd-native-ttf; \
         docker-php-ext-configure ldap --with-libdir="lib/$debMultiarch"; \
         docker-php-ext-install \
                 exif \
