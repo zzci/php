@@ -24,6 +24,7 @@ RUN set -ex; \
                 --with-webp \
                 --with-jpeg \
                 --with-freetype; \
+        docker-php-ext-configure pcntl --enable-pcntl;
         docker-php-ext-configure ldap --with-libdir="lib/$debMultiarch"; \
         docker-php-ext-install \
                 exif \
@@ -34,6 +35,7 @@ RUN set -ex; \
                 pdo_pgsql \
                 zip \
                 mysqli \
+                pcntl \
                 bcmath \
                 opcache \
         ; \
