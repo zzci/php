@@ -17,6 +17,7 @@ RUN set -ex; \
                 libzip-dev \
                 libcurl4-openssl-dev \
                 pkg-config \
+                zlib1g-dev \
                 libssl-dev \
         ; \
         debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
@@ -39,6 +40,7 @@ RUN set -ex; \
                 opcache \
         ; \
         pecl install imagick; \
+        pecl install grpc; \
         printf "\n" | pecl install redis; \
         pecl install mongodb; \
         docker-php-ext-enable mongodb redis imagick; \
