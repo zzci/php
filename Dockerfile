@@ -43,7 +43,7 @@ RUN set -ex; \
         pecl install grpc; \
         printf "\n" | pecl install redis; \
         pecl install mongodb; \
-        docker-php-ext-enable mongodb redis imagick; \
+        docker-php-ext-enable mongodb redis imagick grpc; \
         \
 # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
         apt-mark auto '.*' > /dev/null; \
