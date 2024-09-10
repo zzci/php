@@ -19,6 +19,9 @@ RUN set -ex; \
                 pkg-config \
                 zlib1g-dev \
                 libssl-dev \
+                libgmp-dev \
+                libc-client-dev libkrb5-dev \
+                libxml2-dev \
         ; \
         debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
         docker-php-ext-configure gd \
@@ -26,8 +29,12 @@ RUN set -ex; \
                 --with-jpeg \
                 --with-freetype; \
         docker-php-ext-configure ldap --with-libdir="lib/$debMultiarch"; \
+        docker-php-ext-configure imap --with-kerberos --with-imap-ssl; \
         docker-php-ext-install \
                 exif \
+                imap \
+                gmp \
+                soap \
                 gd \
                 intl \
                 ldap \
@@ -40,12 +47,12 @@ RUN set -ex; \
                 opcache \
         ; \
         pecl install imagick; \
-        pecl install grpc; \
-        printf "\n" | pecl install redis; \
+        pecl install redis; \
         pecl install mongodb; \
-        docker-php-ext-enable mongodb redis imagick grpc; \
+        pecl install mailparse; \
+        docker-php-ext-enable mongodb redis imagick mailparse; \
         \
-# reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
+        # do clean
         apt-mark auto '.*' > /dev/null; \
         apt-mark manual $savedAptMark; \
         ldd "$(php -r 'echo ini_get("extension_dir");')"/*.so \
@@ -58,18 +65,21 @@ RUN set -ex; \
         \
         apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
         \
+        # add runtime tools.
         apt-get install -y --no-install-recommends \
         rsync wget curl net-tools procps unzip; \
         \
         rm -rf /var/lib/apt/lists/* ; \
-# add composer.phar
+        \
+        # add composer.phar
         wget -qO /tmp/composer-installer.php https://getcomposer.org/installer ; \
         php /tmp/composer-installer.php --install-dir=/usr/local/bin/ --filename=composer ; \
-        rm /tmp/composer-installer.php
+        rm /tmp/composer-installer.php; \
+        \
+        # enable apache htaccess
+        a2enmod rewrite
 
 ADD docker-entrypoint.sh /
-
-COPY --from=zzci/init / /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
